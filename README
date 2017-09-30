@@ -1,0 +1,2 @@
+1. TSP problem (solved by BruteForce & Dynamic Programming, verified DP with BF, test their time consuming , DP is much faster)
+2. A similar problem (named as Mall-shopping), similarly be BF & DP
