@@ -59,6 +59,11 @@ def decode_combination(code):
         code = code >> 1
     return lst
 
+#return true if idx is contained in the list represente by code, else false
+def code_combination_contain(code, idx):
+    idx_code=encode_combination([idx])
+    return bool(idx_code & code)
+
 #given code (representing a list), minus the idx vertex
 def code_combination_setminus(code, idx):
     idx_code=encode_combination([idx])
@@ -84,6 +89,7 @@ def tsp_dp_bottom_up(C):
             else:
                 w_lst=decode_combination(w)
                 if v in w_lst:
+                    M[v][w]=float("inf")
                     continue
                 min_cost=float('inf')
                 for z in w_lst:

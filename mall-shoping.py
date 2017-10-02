@@ -45,6 +45,11 @@ def decode_combination(code):
         code = code >> 1
     return lst
 
+#return true if idx is contained in the list represente by code, else false
+def code_combination_contain(code, idx):
+    idx_code=encode_combination([idx])
+    return bool(idx_code & code)
+
 #given code (representing a list), minus the idx vertex
 def code_combination_setminus(code, idx):
     idx_code=encode_combination([idx])
@@ -65,6 +70,9 @@ def solve_dp_bottom_up(v_array, d_matrix):
                 M[j][i] = vnew[j] - d_matrix[j][0]
                 S[j][i] = 0
             else:
+                if(j!=0 and code_combination_contain(i, j)):
+                    M[j][i]=float("inf")
+                    continue
                 max_reward=vnew[j] - d_matrix[j][0]
                 S[j][i]=0
                 i_lst=decode_combination(i)
@@ -90,7 +98,7 @@ def solve_dp_bottom_up(v_array, d_matrix):
     
 if __name__ == "__main__":
     
-    n_mall=9
+    n_mall=4
     v_array=np.random.randint(low=3, high=7, size=(n_mall))
     d_matrix=np.random.randint(low=1, high=9, size=(n_mall+1, n_mall+1))
     d_matrix[range(n_mall+1), range(n_mall+1)] = 0  
